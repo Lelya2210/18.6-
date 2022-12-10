@@ -24,10 +24,10 @@ def get_price(message: telebot.types.Message):
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise APIException('Слишком много параметров. Необходимо ввести только 3 параметра')
+            raise APIException('Слишком много/мало параметров. Необходимо ввести только 3 параметра')
 
         quote, base, amount = values
-        total_base = CurrencyConverter.convert(quote, base, amount)
+        total_base = CurrencyConverter.get_price(quote, base, amount)
     except APIException as e:
         bot.reply_to(message, f'Ошибка пользователя.\n{e}')
     except Exception as e:
